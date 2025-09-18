@@ -6,12 +6,7 @@
 #include <netinet/in.h>
 
 // 公共常量定义
-#define MAX_IP_LENGTH INET_ADDRSTRLEN
-#define MAX_PATH_ID_LENGTH 20
-#define AES_KEY_SIZE 32
-#define AES_IV_SIZE 12
-#define AUTH_TAG_SIZE 16
-#define MAX_PAYLOAD_SIZE 1024
+
 
 
 // 消息类型枚举
@@ -24,10 +19,10 @@ typedef enum {
 } MessageType;
 
 typedef struct {
-    char controller_ip1[MAX_IP_LENGTH];  // Controller的第一个IP地址
-    char controller_ip2[MAX_IP_LENGTH];  // Controller的第二个IP地址
-    char controlled_ip3[MAX_IP_LENGTH];  // Controlled的第一个IP地址
-    char controlled_ip4[MAX_IP_LENGTH];  // Controlled的第二个IP地址
+    char controller_ip1[INET_ADDRSTRLEN];  // Controller的第一个IP地址
+    char controller_ip2[INET_ADDRSTRLEN];  // Controller的第二个IP地址
+    char controlled_ip3[INET_ADDRSTRLEN];  // Controlled的第一个IP地址
+    char controlled_ip4[INET_ADDRSTRLEN];  // Controlled的第二个IP地址
     int output_port;                     // 用来发送消息的端口号
     int input_port;                      // 用来接收消息的端口号
     int heartbeat_interval;              // 心跳发送间隔(毫秒)
