@@ -25,12 +25,12 @@ typedef struct {
     char controlled_ip4[INET_ADDRSTRLEN];  // Controlled的第二个IP地址
     int output_port;                     // 用来发送消息的端口号
     int input_port;                      // 用来接收消息的端口号
-    int heartbeat_interval;              // 心跳发送间隔(毫秒)
     int heartbeat_validity;              // 心跳消息有效期(毫秒)
     int heartbeat_warn;                  // 心跳超时警告阈值(毫秒)，最后心跳时间超过该值则认为路径不可用
     int cmd_validity;                    // 命令消息有效期(毫秒)
     int ack_timeout;                     // ACK等待超时时间(毫秒)
     uint8_t max_retry_count;             // 最大重传次数
+    int auto_restore_interval;           // 自动恢复间隔时间(毫秒)，断电后经过该时间自动发送恢复供电指令
 } Config;
 
 typedef struct {
@@ -101,7 +101,18 @@ int pack_message(MessageType message_type,uint8_t direction,uint32_t sequence_nu
 int parse_message(const uint8_t* buf, size_t buf_len, Message* msg);
 
 
+/*
+分别用于实现日志打印和告警功能，等待公司接口
+*/
+void print_log(char text);
+void warning(uint8_t warning_type,char warning_text);
 
+/*
+ * @brief 用于控制灯的颜色，等待公司接口
+ * @param targetLight 目标灯编号
+ * @param colorCode 颜色代码（0:关闭, 1:绿色，2黄色）
+*/
+void updateLightColor(int targetLight, int colorCode);
 
 
 
