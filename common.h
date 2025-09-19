@@ -100,6 +100,11 @@ int pack_message(MessageType message_type,uint8_t direction,uint32_t sequence_nu
  */
 int parse_message(const uint8_t* buf, size_t buf_len, Message* msg);
 
+/**
+ * @brief 拧钥匙后，判断用户是否经过授权。等待公司接口
+ * @return 合法返回true，不合法返回false
+ */
+bool is_authentic();
 
 /*
 分别用于实现日志打印和告警功能，等待公司接口
